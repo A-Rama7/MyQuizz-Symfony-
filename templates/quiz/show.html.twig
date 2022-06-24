@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz Topic !{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if quizzTopic[0] %}
+        <h1 class="text-center my-3">quiz Topic: {{quizzTopic[0]['topic_name']}} </h1>
+    {% endif %}
+  
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for quiz in quizzTopic %}
+             <div class="col">
+                <a class="img-thumbnail d-flex flex-column text-decoration-none" href="/quiz/{{quiz.id}}">
+                    {% if quiz.image == false %}
+                        <img src="{{asset('images/default-image.png')}}" alt="{{quiz.name}}">
+                        {% else %}
+                        <img src="{{asset('images/')}}{{quiz.name}}" alt="{{quiz.name}}">
+                    {% endif %}
+                    <h5 class="text-center my-2">{{ quiz.name }}</h5>
+                </a>
+             </div>
+  {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

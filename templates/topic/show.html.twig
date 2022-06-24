@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Topic  - {{topic.name}} {% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <h1 class="text-center my-3">Topic : {{topic.name}}</h1>
+    <div class="d-flex justify-content-center">
+        {# {% for topic in topicz %} #}
+             {# <div class="col text-center"> #}
+                <a class="img-thumbnail d-flex flex-column text-decoration-none" href="/quiz/topic/{{topic.id}}">
+                    {% if topic.image == false %}
+                        <img src="{{asset('images/default-image.png')}}" alt="{{topic.name}}">
+                        {% else %}
+                        <img src="{{asset('images/topic/')}}{{topic.image}}" alt="{{topic.name}}">
+                    {% endif %}
+                    <h5 class="text-center my-2">{{ topic.name }}</h5>
+                </a>
+             </div>
+  {# {% endfor %} #}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+  <div class="row row-cols-1  row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-8 row-cols-xxl-8 g-4">
+    {% for topic in topics %}
+      <div class="col">
+        <a class="img-thumbnail d-flex flex-column text-decoration-none" href="/quiz/topic/{{topic.id}}">
+          {% if topic.image == false %}
+              <img src="{{asset('images/default-image.png')}}" alt="{{topic.name}}">
+              {% else %}
+              <img src="{{asset('images/topic/')}}{{topic.image}}" alt="{{topic.name}}">
+          {% endif %}
+            <h5 class="text-center mt-2">{{topic.name}}</h5>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

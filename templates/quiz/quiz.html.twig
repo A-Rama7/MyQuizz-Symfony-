@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %} {% block title %}Quiz - !{% endblock %} {% block
+body %}
+  <div class="container">
+    
+    
+    {# <pre>
+      {{ dump(quiz) }}
+    </pre> #}
+
+    <div class="row">
+
+      {% if quiz[0]['quiz_name']%}
+        <h1 class="text-center my-3">Quiz: {{quiz[0]['quiz_name']}}</h1>
+      {% endif %}
+    
+
+      {% if quiz[0]['quiz_image'] == false %}
+        <img
+          class="img-thumbnail"
+          src="{{ asset('images/default-image.png') }}"
+          alt="{{ quiz[0]['quiz_name'] }}"
+          style="height:40vh;width:90vw;object-fit: contain;"
+        />
+      {% else %}
+        <img
+          class="img-fluid"
+          src="{{ asset('images/') }}{{ quiz[0]['quiz_name'] }}"
+          alt="{{ quiz[0]['quiz_name'] }}"
+        />
+      {% endif %}
+
+      <div class="d-flex justify-content-center my-4">
+          {% if swich == true %}
+            <h3> {{isAnswer == true ? 'Réponse correcte' : 'Mauvaise réponse' }}</h3>
+          {% endif %}
+       </div>
+   </div>
+
+   <div class="row">
+     {% if quiz[0] %}
+       <h2 class="text-center my-3">{{ quiz[0].question }}</h2>
+     {% endif %}
+
+   </div>
+    {# {{dump(questionId|length)}}
+     {{dump(nextQuestion)}} #}
+
+{# {{dump(isAnswer)}} #}
+    <div class="d-grid gap-3 mb-4">
+      {% for quiz in quiz %}
+        {% if swich == false %}
+            <a href="{{path}}?question={{quiz.question_id}}&answer={{quiz.answer_id}}" class="btn border border-primary border-2">{{ quiz.answer }}</a>
+          {% else %}
+
+             <button class="btn border-2 {{isAnswer == true and quiz.answer_expected == 1 ? 'text-success border border-success' : 'btn border border-danger border-2'}} ">{{quiz.answer}}</button>
+        {% endif %}
+
+    {% endfor %}
+    </div>
+
+{% set num = path|split('/') %}
+
+<div class="d-flex justify-content-center my-2">
+
+{% if nextQuestion >= questionId|length - 1 %}
+ <a href="{{path('quiz_result',{id: num[2]}) }}" class="btn bg-warning"> Resultat du Quiz</a>
+{% else %}
+<a href="{{path('quiz_show_next',{id: nextQuestion + 1, quiz: num[2]})}}" class="btn border border-primary border-2">Next</a>
+{% endif %}
+</div>
+
+
+ </div>
+
+{% endblock %}
